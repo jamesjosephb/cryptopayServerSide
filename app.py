@@ -1,6 +1,6 @@
 #!flask/bin/python
 from flask import Flask
-from flask import Flask, jsonify, request, json
+from flask import Flask, jsonify, request, render_template, json
 
 from QueryFunctions import *
 
@@ -9,7 +9,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello, World!"
+    #return render_template('%s.html' % page_name) < / string: page_name >
+    return render_template('index.html')
+    #return "Hello, World!"
+
+"""@app.route('/<string:page_name>/')
+def render_static(page_name):
+    return render_template('%s.html' % page_name)</string:page_name>"""
+
+
+
 
 #Example: http://127.0.0.1:5000/sites?id=8
 @app.route('/sites', methods=['GET'])

@@ -10,9 +10,9 @@ from sqlalchemy import *
 # SQLAlchemy documentaion https://docs.sqlalchemy.org/en/13/orm/tutorial.html#creating-a-session
 # connection time out doc https://docs.sqlalchemy.org/en/13/dialects/mysql.html
 Base = declarative_base()
-OSinstance = "Serverrer" #Mac or Server
+OSinstance = "Server" #Mac or Server
 if OSinstance == "Server":
-        engine = create_engine("mysql+pymysql://root@localhost/cpData")
+    engine = create_engine("config.mysqlLogin")
 else:
     engine = create_engine("config.mysqlLogin")
 Session = sessionmaker(bind=engine)

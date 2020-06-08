@@ -77,7 +77,7 @@ def CordinatorStatusbySiteID(siteID):
         return DictofAlarm
 
 
-def purchasebySiteID(siteID):
+'''def purchasebySiteID(siteID):
     session = Session()
     listOfPurchases = []
     current_time = datetime.datetime.utcnow()
@@ -102,7 +102,44 @@ def purchasebySiteID(siteID):
     if len(listOfPurchases) == 0:
         return None
     else:
+        return listOfPurchases'''
+
+
+
+def purchasebySiteID(siteID):
+    session = Session()
+    listOfPurchases = []
+    # current_time = datetime.datetime.utcnow() Don't use this because the copy of the database end at the beginning of Nov which is over 6 months ago.
+    current_time = datetime.datetime(2019,11,3,20,25,0)
+    sixMonthsAgo = current_time - datetime.timedelta(weeks=25)
+    purchaseQuery = session.query(Purchase).filter(Purchase.siteid == siteID).\
+        filter(Purchase.time > sixMonthsAgo).\
+        order_by(Purchase.time.desc())
+    #listOfPurchaseObjects = purchaseQuery.all()
+    #for i in listOfPurchaseObjects:
+    for i in purchaseQuery:
+        DictOfPurchase = {}
+        DictOfPurchase["purchaseid"] = i.purchaseid
+        DictOfPurchase["siteid"] = i.siteid
+        DictOfPurchase["name"] = i.name
+        DictOfPurchase["cpid"] = i.cpid
+        if (i.transid != None):
+            DictOfPurchase["transid"] = i.transid
+        else:
+            continue
+        DictOfPurchase["time"] = i.time
+        DictOfPurchase["totalcharge"] = i.totalcharge
+        DictOfPurchase["transidfinal"] = i.transidfinal
+        listOfPurchases.append(DictOfPurchase)
+    if len(listOfPurchases) == 0:
+        return None
+    else:
         return listOfPurchases
+
+
+
+
+
 
 def transactionsbypurchaseid(purchaseID):
     session = Session()
@@ -158,8 +195,9 @@ def ownerIDByUserName(userName):
 
 
 if __name__ == '__main__':
-    print(purchasebySiteIDwithTransactions("MPM084938123"))
-
+    #print(purchasebySiteIDwithTransactions("MPM084938123"))
+    print(sitesByOwnerID(8))
+    print(purchasebySiteID("MPM084938123"))
 
 
 

@@ -10,7 +10,7 @@ from sqlalchemy import *
 # SQLAlchemy documentaion https://docs.sqlalchemy.org/en/13/orm/tutorial.html#creating-a-session
 # connection time out doc https://docs.sqlalchemy.org/en/13/dialects/mysql.html
 Base = declarative_base()
-OSinstance = "Server" #Mac or Server
+OSinstance = "Mac" #Mac or Server
 if OSinstance == "Server":
     engine = create_engine("config.mysqlLogin")
 else:

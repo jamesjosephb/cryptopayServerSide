@@ -23,7 +23,7 @@ def swipersConfigbySiteID(siteID):
     else:
         return listOfSwipers
 
-def swipersBySiteID(siteID):
+'''def swipersBySiteID(siteID):
     session = Session()
     listOfSwipers = []
     for instance in session.query(Swiper). \
@@ -38,7 +38,40 @@ def swipersBySiteID(siteID):
     if len(listOfSwipers) == 0:
         return None
     else:
+        return listOfSwipers'''
+
+
+
+
+def swipersBySiteID(siteID):
+    session = Session()
+    listOfSwipers = []
+    for instance in session.query(Swiper). \
+            filter(Swiper.siteid == siteID):
+        # print(instance.name)
+        DictOfSwiper = {}
+        DictOfSwiper["name"] = instance.name
+        # DictOfSwiper["purchtype"] = instance.purchtype
+        DictOfSwiper["macaddr"] = instance.macaddr
+        DictOfSwiper["lastcontact"] = instance.lastcontact
+        for secondInstance in session.query(SwiperConfig). \
+                filter(SwiperConfig.SiteID == siteID and SwiperConfig.Swiper_MAC_address == instance.macaddr):
+            DictOfSwiper["SwiperName"] = secondInstance.SwiperName
+            DictOfSwiper["SwiperProfile"] = secondInstance.SwiperProfile
+            DictOfSwiper["PrchTyp"] = secondInstance.PrchTyp
+            DictOfSwiper["Rate"] = secondInstance.Rate
+            DictOfSwiper["MinCh"] = secondInstance.MinCh
+            DictOfSwiper["MaxCh"] = secondInstance.MaxCh
+            DictOfSwiper["Amex"] = secondInstance.Amex
+            DictOfSwiper["BnsCoin"] = secondInstance.BnsCoin
+        listOfSwipers.append(DictOfSwiper)
+    if len(listOfSwipers) == 0:
+        return None
+    else:
         return listOfSwipers
+
+
+
 
 def swiperconfigBySiteIDMAC(siteID, swiperMAC):
     session = Session()
@@ -54,6 +87,12 @@ def swiperconfigBySiteIDMAC(siteID, swiperMAC):
         DictOfSwiper["Amex"] = instance.Amex
         DictOfSwiper["BnsCoin"] = instance.BnsCoin
         return DictOfSwiper
+
+
+
+
+
+
 
 def AlarmContactsbySiteID(siteID):
     session = Session()
@@ -196,8 +235,9 @@ def ownerIDByUserName(userName):
 
 if __name__ == '__main__':
     #print(purchasebySiteIDwithTransactions("MPM084938123"))
-    print(sitesByOwnerID(8))
-    print(purchasebySiteID("MPM084938123"))
+    #print(sitesByOwnerID(8))
+    #print(purchasebySiteID("MPM084938123"))
+    print(swipersBySiteID("MPM084938123"))
 
 
 

@@ -56,15 +56,21 @@ def swipersBySiteID(siteID):
         DictOfSwiper["lastcontact"] = instance.lastcontact
         for secondInstance in session.query(SwiperConfig). \
                 filter(SwiperConfig.SiteID == siteID and SwiperConfig.Swiper_MAC_address == instance.macaddr):
-            DictOfSwiper["SwiperName"] = secondInstance.SwiperName
-            DictOfSwiper["SwiperProfile"] = secondInstance.SwiperProfile
-            DictOfSwiper["PrchTyp"] = secondInstance.PrchTyp
-            DictOfSwiper["Rate"] = secondInstance.Rate
-            DictOfSwiper["MinCh"] = secondInstance.MinCh
-            DictOfSwiper["MaxCh"] = secondInstance.MaxCh
-            DictOfSwiper["Amex"] = secondInstance.Amex
-            DictOfSwiper["BnsCoin"] = secondInstance.BnsCoin
+                if instance.macaddr == secondInstance.Swiper_MAC_address:
+                    print(instance.macaddr)
+                    DictOfSwiper["SwiperName"] = secondInstance.SwiperName
+                    DictOfSwiper["SwiperProfile"] = secondInstance.SwiperProfile
+                    DictOfSwiper["PrchTyp"] = secondInstance.PrchTyp
+                    DictOfSwiper["Rate"] = secondInstance.Rate
+                    DictOfSwiper["MinCh"] = secondInstance.MinCh
+                    DictOfSwiper["MaxCh"] = secondInstance.MaxCh
+                    DictOfSwiper["Amex"] = secondInstance.Amex
+                    DictOfSwiper["BnsCoin"] = secondInstance.BnsCoin
+                    break
         listOfSwipers.append(DictOfSwiper)
+
+
+
     if len(listOfSwipers) == 0:
         return None
     else:

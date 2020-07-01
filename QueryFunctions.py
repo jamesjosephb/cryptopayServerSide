@@ -3,7 +3,7 @@ import datetime
 
 
 
-def swipersConfigbySiteID(siteID):
+'''def swipersConfigbySiteID(siteID): # This should be a funtion should be using join statement to queury but the database has no relationships
     session = Session()
     listOfSwipers = []
     for instance in session.query(SwiperConfig).\
@@ -21,9 +21,9 @@ def swipersConfigbySiteID(siteID):
     if len(listOfSwipers) == 0:
         return None
     else:
-        return listOfSwipers
+        return listOfSwipers'''
 
-'''def swipersBySiteID(siteID):
+def swipersBySiteID(siteID):
     session = Session()
     listOfSwipers = []
     for instance in session.query(Swiper). \
@@ -38,7 +38,7 @@ def swipersConfigbySiteID(siteID):
     if len(listOfSwipers) == 0:
         return None
     else:
-        return listOfSwipers'''
+        return listOfSwipers
 
 
 
@@ -54,11 +54,19 @@ def swipersBySiteID(siteID):
         # DictOfSwiper["purchtype"] = instance.purchtype
         DictOfSwiper["macaddr"] = instance.macaddr
         DictOfSwiper["lastcontact"] = instance.lastcontact
+        #DictOfSwiper["SwiperName"] = instance.name
+        DictOfSwiper["SwiperProfile"] = "Out of Service"
+        DictOfSwiper["PrchTyp"] = "None"
+        DictOfSwiper["Rate"] = 60
+        DictOfSwiper["MinCh"] = 100
+        DictOfSwiper["MaxCh"] = 1500
+        DictOfSwiper["Amex"] = "No"
+        DictOfSwiper["BnsCoin"] = 0
         for secondInstance in session.query(SwiperConfig). \
                 filter(SwiperConfig.SiteID == siteID and SwiperConfig.Swiper_MAC_address == instance.macaddr):
                 if instance.macaddr == secondInstance.Swiper_MAC_address:
                     print(instance.macaddr)
-                    DictOfSwiper["SwiperName"] = secondInstance.SwiperName
+                    #DictOfSwiper["SwiperName"] = secondInstance.SwiperName
                     DictOfSwiper["SwiperProfile"] = secondInstance.SwiperProfile
                     DictOfSwiper["PrchTyp"] = secondInstance.PrchTyp
                     DictOfSwiper["Rate"] = secondInstance.Rate

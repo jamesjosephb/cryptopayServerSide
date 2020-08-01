@@ -24,15 +24,6 @@ def id():
     return jsonify(sitesByOwnerID(id))
 
 
-'''@app.route('/swipersconfig', methods=['POST'])
-def swipersconfig():
-    print("Hello, World!")
-    #return json.dumps(request .json)
-    #return jsonify(swiperconfigBySiteIDMAC(SiteID, MacAddress))'''
-
-'''curl -H "Content-type: application/json" -X POST http://127.0.0.1:5000/swipersconfig -d '{"message":"Hello Data"}'''
-
-
 @app.route('/login=<UserName>', methods=['GET'])
 def login(UserName):
     SitesArray = []
@@ -45,31 +36,39 @@ def login(UserName):
         #MPMArrayofDicts.append({"Swipers": swipersBySiteID(MPM)})
         #MPMArrayofDicts.append(CordinatorStatusbySiteID(MPM))
         #MPMArrayofDicts.append(SiteInfobySiteID(MPM))
-        SitesArray.append({**(CordinatorStatusbySiteID(MPM)), **(SiteInfobySiteID(MPM)), **{"Swipers": swipersBySiteID(MPM)}, **{"siteID" : MPM}})
+        SitesArray.append({**(CordinatorStatusbySiteID(MPM)),
+        **(SiteInfobySiteID(MPM)), **{"Swipers": swipersBySiteID(MPM)},
+        **{"siteID" : MPM}})
     LoginDict["SiteArray"] = SitesArray
     return jsonify(LoginDict)
+
 
 @app.route('/swipersstatus=<SiteID>', methods=['GET'])
 def swipersstatus(SiteID):
     Swipers = {"Swipers" : swipersBySiteID(SiteID)}
     return jsonify(Swipers)
 
+
 @app.route('/swipersconfig/site=<SiteID>/swiper=<MacAddress>', methods=['GET'])
 def swipersconfig(SiteID,MacAddress):
     return jsonify(swiperconfigBySiteIDMAC(SiteID, MacAddress))
+
 
 @app.route('/purchases=<SiteID>', methods=['GET'])
 def purchases(SiteID):
     purchases = {"purchases" : purchasebySiteID(SiteID)}
     return jsonify(purchases)
 
+
 @app.route('/coordinatorstatus=<SiteID>', methods=['GET'])
 def coordinatorstatus(SiteID):
     return jsonify(CordinatorStatusbySiteID(SiteID))
 
+
 @app.route('/alarmcontacts=<SiteID>', methods=['GET'])
 def alarmcontacts(SiteID):
     return jsonify(AlarmContactsbySiteID(SiteID))
+
 
 @app.route('/transaction=<purchID>', methods=['GET'])
 def transaction(purchID):
@@ -80,6 +79,7 @@ def transaction(purchID):
 @app.route('/siteinfo=<siteID>', methods=['GET'])
 def siteinfo(siteID):
     return jsonify(SiteInfobySiteID(siteID))
+
 
 if __name__ == '__main__':
     #app.run(debug=True) #Test Locally

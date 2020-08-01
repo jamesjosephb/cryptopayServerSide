@@ -2,27 +2,6 @@ from DataBaseModel import *
 import datetime
 
 
-
-'''def swipersConfigbySiteID(siteID): # This should be a funtion should be using join statement to queury but the database has no relationships
-    session = Session()
-    listOfSwipers = []
-    for instance in session.query(SwiperConfig).\
-            filter(SwiperConfig.SiteID == siteID):
-        DictOfSwiperConfig = {}
-        DictOfSwiperConfig["Swiper_MAC_address"] = instance.Swiper_MAC_address
-        DictOfSwiperConfig["SwiperName"] = instance.SwiperName
-        DictOfSwiperConfig["SwiperProfile"] = instance.SwiperProfile
-        DictOfSwiperConfig["Rate"] = instance.Rate
-        DictOfSwiperConfig["MinCh"] = instance.MinCh
-        DictOfSwiperConfig["MaxCh"] = instance.MaxCh
-        DictOfSwiperConfig["Amex"] = instance.Amex
-        DictOfSwiperConfig["BtnAdd"] = instance.BtnAdd
-        listOfSwipers.append(DictOfSwiperConfig)
-    if len(listOfSwipers) == 0:
-        return None
-    else:
-        return listOfSwipers'''
-
 def swipersBySiteID(siteID):
     session = Session()
     listOfSwipers = []
@@ -39,8 +18,6 @@ def swipersBySiteID(siteID):
         return None
     else:
         return listOfSwipers
-
-
 
 
 def swipersBySiteID(siteID):
@@ -76,15 +53,10 @@ def swipersBySiteID(siteID):
                     DictOfSwiper["BnsCoin"] = secondInstance.BnsCoin
                     break
         listOfSwipers.append(DictOfSwiper)
-
-
-
     if len(listOfSwipers) == 0:
         return None
     else:
         return listOfSwipers
-
-
 
 
 def swiperconfigBySiteIDMAC(siteID, swiperMAC):
@@ -101,11 +73,6 @@ def swiperconfigBySiteIDMAC(siteID, swiperMAC):
         DictOfSwiper["Amex"] = instance.Amex
         DictOfSwiper["BnsCoin"] = instance.BnsCoin
         return DictOfSwiper
-
-
-
-
-
 
 
 def AlarmContactsbySiteID(siteID):
@@ -128,35 +95,6 @@ def CordinatorStatusbySiteID(siteID):
         DictofAlarm["sitepurchstat"] = ("Yes" if instance.sitepurchstat == 0 else "No")
         DictofAlarm["sitepurchemail"] = ("Yes" if instance.sitepurchemail == 0 else "No")
         return DictofAlarm
-
-
-'''def purchasebySiteID(siteID):
-    session = Session()
-    listOfPurchases = []
-    current_time = datetime.datetime.utcnow()
-    sixMonthsAgo = current_time - datetime.timedelta(weeks=25)
-    purchaseQuery = session.query(Purchase).filter(Purchase.siteid == siteID) .\
-                                              filter(Purchase.time > sixMonthsAgo) .\
-                                              order_by(Purchase.time.desc())
-    listOfPurchaseObjects = purchaseQuery.all()
-    for i in listOfPurchaseObjects:
-        DictOfPurchase = {}
-        DictOfPurchase["purchaseid"] = i.purchaseid
-        DictOfPurchase["siteid"] = i.siteid
-        DictOfPurchase["name"] = i.name
-        DictOfPurchase["cpid"] = i.cpid
-        if (i.transid != None):
-            DictOfPurchase["transid"] = i.transid
-        else: continue
-        DictOfPurchase["time"] = i.time
-        DictOfPurchase["totalcharge"] = i.totalcharge
-        DictOfPurchase["transidfinal"] = i.transidfinal
-        listOfPurchases.append(DictOfPurchase)
-    if len(listOfPurchases) == 0:
-        return None
-    else:
-        return listOfPurchases'''
-
 
 
 def purchasebySiteID(siteID):
@@ -190,10 +128,6 @@ def purchasebySiteID(siteID):
         return listOfPurchases
 
 
-
-
-
-
 def transactionsbypurchaseid(purchaseID):
     session = Session()
     listOfTransactions = []
@@ -208,6 +142,7 @@ def transactionsbypurchaseid(purchaseID):
         return None
     else:
         return listOfTransactions
+
 
 def SiteInfobySiteID(SiteID):
     session = Session()
@@ -224,6 +159,7 @@ def SiteInfobySiteID(SiteID):
         DictOfSite["timezone"] = instance.timezone
         return DictOfSite
 
+
 def sitesByOwnerID(ownerID):
     session = Session()
     listOfSites = []
@@ -234,17 +170,12 @@ def sitesByOwnerID(ownerID):
         return None
     return listOfSites
 
+
 def ownerIDByUserName(userName):
     session = Session()
     for instance in session.query(User):
         if instance.username == userName:
             return instance.userid
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -253,24 +184,3 @@ if __name__ == '__main__':
     #print(purchasebySiteID("MPM084938123"))
     #print(swipersBySiteID("MPM084938123"))
     print(transactionsbypurchaseid(71232170))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

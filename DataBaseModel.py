@@ -4,8 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
 
 
-
-
 # Modeling types converstion https://code-maven.com/slides/python-programming/sqlalchemy-types
 # SQLAlchemy documentaion https://docs.sqlalchemy.org/en/13/orm/tutorial.html#creating-a-session
 # connection time out doc https://docs.sqlalchemy.org/en/13/dialects/mysql.html
@@ -47,13 +45,9 @@ class User(Base):
     #flexibility = Column(Boolean(4))
     #trialflags = Column(Integer())
 
-    '''def __repr__(self):
-        return "<User(name='%s', fullname='%s', nickname='%s')>" % (
-            self.name, self.fullname, self.nickname)'''
 
 class Site(Base):
     __tablename__ = 'sites'
-
     siteid = Column(String(16), primary_key=True)
     owneruserid = Column(Integer(), primary_key=True)
     sitename = Column(String(32))
@@ -89,6 +83,7 @@ class Site(Base):
     flcardver = Column(Boolean())
     server = Column(String(20))
 
+
 class Swiper(Base):
     __tablename__ = 'swipers'
     siteid = Column(String(16), primary_key=True)
@@ -106,6 +101,7 @@ class Swiper(Base):
     lastnotified = Column(DateTime())
     notificationlimit = Column(Integer())
     machinecapacity = Column(String(24))
+
 
 class SwiperConfig(Base):
     __tablename__ = 'SwiperConfigs'
@@ -137,6 +133,7 @@ class SwiperConfig(Base):
     BnsTime = Column(Integer)
     PrchLim = Column(Integer)
 
+
 class Alarm(Base):
     __tablename__ = 'alarms'
     siteid =Column(String(12), primary_key=True)
@@ -151,6 +148,7 @@ class Alarm(Base):
     email1 =Column(String(255))
     email2 =Column(String(255))
     email3 =Column(String(255))
+
 
 class Purchase(Base):
     __tablename__ = 'purchases'
@@ -169,6 +167,7 @@ class Purchase(Base):
     cardaccountid = Column(Integer())
     transidfinal = Column(String(20))
 
+
 class Transaction(Base):
     __tablename__ = 'transactions'
     transactionid = Column(Integer(), primary_key=True)
@@ -179,7 +178,6 @@ class Transaction(Base):
     purchtype = Column(Integer())
     modpurchtype = Column(Integer())
     macaddr = Column(String(16))
-
 
 
 if __name__ == '__main__':
@@ -203,13 +201,7 @@ if __name__ == '__main__':
             return None
         else:
             return listOfSwipers
-
-
     list = SwipersbySiteID('MPM540873054')
 
     for i in (list):
         print(i)
-
-
-
-

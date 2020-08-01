@@ -1,7 +1,6 @@
 #!flask/bin/python
 from flask import Flask
 from flask import Flask, jsonify, request, render_template, json
-
 from QueryFunctions import *
 
 app = Flask(__name__)
@@ -10,10 +9,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "You Got Here!"
-
-
-
-
 
 
 #Example: http://127.0.0.1:5000/sites?id=8

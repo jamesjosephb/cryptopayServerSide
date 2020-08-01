@@ -251,8 +251,8 @@ if __name__ == '__main__':
     #print(purchasebySiteIDwithTransactions("MPM084938123"))
     #print(sitesByOwnerID(8))
     #print(purchasebySiteID("MPM084938123"))
-    print(swipersBySiteID("MPM084938123"))
-
+    #print(swipersBySiteID("MPM084938123"))
+    print(transactionsbypurchaseid(71232170))
 
 
 

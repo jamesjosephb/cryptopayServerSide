@@ -2,17 +2,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
+import config
 
 
-# Modeling types converstion https://code-maven.com/slides/python-programming/sqlalchemy-types
-# SQLAlchemy documentaion https://docs.sqlalchemy.org/en/13/orm/tutorial.html#creating-a-session
-# connection time out doc https://docs.sqlalchemy.org/en/13/dialects/mysql.html
 Base = declarative_base()
-OSinstance = "Mac" #Mac or Server
-if OSinstance == "Server":
-    engine = create_engine("config.mysqlLogin")
-else:
-    engine = create_engine("config.mysqlLogin")
+engine = create_engine(config.mysqlLogin)
 Session = sessionmaker(bind=engine)
 
 

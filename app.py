@@ -3,6 +3,7 @@ from flask import Flask
 from flask import Flask, jsonify, request, render_template, json
 from QueryFunctions import *
 
+
 app = Flask(__name__)
 
 
@@ -83,4 +84,4 @@ def siteinfo(siteID):
 
 if __name__ == '__main__':
     #app.run(debug=True) #Test Locally
-    app.run(host='0.0.0.0') # Run but don't leave on becasue it is not secure
+    app.run(host='0.0.0.0')

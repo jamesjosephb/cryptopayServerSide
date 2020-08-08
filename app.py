@@ -7,9 +7,23 @@ from QueryFunctions import *
 app = Flask(__name__)
 
 
+def keyCheck():
+    headers = request.headers
+    auth = headers.get("X-Api-Key")
+    if auth == config.apiKey:
+        return True
+        #return jsonify({"message": "OK: Authorized"}), 200
+    else:
+        return False
+        #return jsonify({"message": "ERROR: Unauthorized"}), 401
+
 @app.route('/')
 def index():
-    return "You Got Here!"
+    isKeyCorrect = keyCheck()
+    if isKeyCorrect != True:
+        return jsonify({"message": "ERROR: Unauthorized"}), 401
+    else:
+        return "You Got Here"
 
 
 #Example: http://127.0.0.1:5000/sites?id=8
